@@ -22,21 +22,30 @@
 
   var gpx2czml = {
     async : function (url, cbFunc) {
-      console.log('getGpx url is : ', url);
-      $.ajax({
-        method : 'get',
-        url : url,
-        dataType : 'xml',
-        timeout : 3000,
-        success : function (res) {
-          console.log('success : ', res);
-          typeof cbFunc == "function" && cbFunc(false, res);
-        },
-        error : function (err) {
-          console.log('error : ', err);
-          typeof cbFunc == "function" && cbFunc(true, err);
+      var httpRequest;
+      var self = this;
+
+      if (window.XMLHttpRequest) {
+        httpRequest = new XMLHttpRequest();
+      } else if (window.ActiveXObject) {
+        httpRequest = new ActiveXObject("Microsoft.XMLHTTP");
+      }
+
+      httpRequest.onreadystatechange = getGpxData;
+      httpRequest.open('GET', url);
+      httpRequest.send();
+
+      function getGpxData() {
+        if (httpRequest.readyState === 4) {
+          if (httpRequest.status === 200) {
+            self.parseGpx(httpRequest.responseText, function (isError, res) {
+                typeof cbFunc == "function" && cbFunc(isError, res);
+            });
+          } else {
+            typeof cbFunc == "function" && cbFunc(true, 'http request error');
+          }
         }
-      });
+      }
     },
     /**
      * gpx file upload 프로세싱 처리(async)
