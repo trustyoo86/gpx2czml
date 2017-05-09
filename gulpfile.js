@@ -46,8 +46,6 @@ gulp.task('bundle-pure', ['clean-pure'], function () {
   //   .pipe(buffer())
   //   .pipe(gulp.dest('dist/pure'));
   return gulp.src([
-    'bower_components/jquery/dist/jquery.min.js',
-    'bower_components/lodash/dist/lodash.min.js',
     'src/utils/fileStream.js',
     'src/gpx2czml.js'
   ])

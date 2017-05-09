@@ -16,6 +16,13 @@ angular.module('exampleApp', [
     //handle gpx file
     $scope.handleFile = function (e) {
       console.log('file is : ', e.target.files);
-      gpx2czml.asyncFromFile(e);
+      gpx2czml.asyncFromFile(e, function (isError, czml) {
+        if (isError) {
+          console.log('error is : ', czml);
+        } else {
+          console.log('czml data is : ', czml);
+          $scope.czmlResult = JSON.stringify(czml, null, 4);
+        }
+      });
     };
   });
