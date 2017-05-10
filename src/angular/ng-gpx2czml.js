@@ -176,7 +176,14 @@
 
              //binding target
              var czmlData = [{
-               version : gpxNode.getAttribute('version')
+               name : gpxNode.getAttribute('creator'),
+               version : gpxNode.getAttribute('version'),
+               clock : {
+                 interval : null,
+                 currentTime : startTime,
+                 multiplier : 1,
+                 range : 'CLAMPED'
+               }
              }, {
                position : {
                  cartographicDegrees : []
@@ -194,8 +201,14 @@
                    targetSeconds = new Date(time).getTime(), //interval time from startSeconds
                    deffSeconds = (targetSeconds - startSeconds) / 1000;  //convert second
 
-               var trkItem = [deffSeconds, lat, lon, ele];
-               czmlData[1].position.cartographicDegrees[idx] = trkItem;
+               czmlData[1].position.cartographicDegrees.push(deffSeconds);
+               czmlData[1].position.cartographicDegrees.push(lat);
+               czmlData[1].position.cartographicDegrees.push(lon);
+               czmlData[1].position.cartographicDegrees.push(ele);
+
+               if (idx == (trkPts.length -1)) {
+                 czmlData[0].clock.interval = startTime + '/' + time;
+               }
              }
 
              typeof cbFunc == "function" && cbFunc(false, czmlData);
