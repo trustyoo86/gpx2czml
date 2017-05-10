@@ -166,18 +166,18 @@
           */
          bindCzmlData : function (gpxNode, cbFunc) {
            var self = this;
+           var sumEle = 0;
 
            try {
              //xml parsing
              var metaData = gpxNode.getElementsByTagName('metadata')[0], //metadata
-                 timeData = metaData.getElementsByTagName('time')[0],  //time
                  trkContent = gpxNode.getElementsByTagName('trk')[0],  //tracking data
                  trkSeg = trkContent.getElementsByTagName('trkseg')[0],  //trkseg
                  trkPts = trkSeg.getElementsByTagName('trkpt');  //tracking point arrays
 
              //get start time
-             var startTime = this.getTextTag(timeData),
-                 startSeconds = new Date(startTime).getTime();
+             var startTime,
+                 startSeconds;
 
              //binding target
              var czmlData = [{
@@ -191,6 +191,7 @@
                }
              }, {
                position : {
+                 epoch : startTime,
                  cartographicDegrees : []
                }
              }];
@@ -200,16 +201,25 @@
                var trkInfo = trkPts[idx],
                    lat = parseFloat(trkInfo.getAttribute('lat')),  //latitude
                    lon = parseFloat(trkInfo.getAttribute('lon')),  //longitude
-                   ele = parseFloat(self.getTextTag(trkInfo.getElementsByTagName('ele')[0])),  //ele
+                   ele = self.getTextTag(trkInfo.getElementsByTagName('ele')[0]),  //ele
                    time = self.getTextTag(trkInfo.getElementsByTagName('time')[0]),  //interval time
-                   extensions = self.getTextTag(trkInfo.getElementsByTagName('extensions')[0]),  //extensions
                    targetSeconds = new Date(time).getTime(), //interval time from startSeconds
-                   deffSeconds = (targetSeconds - startSeconds) / 1000;  //convert second
+                   deffSeconds = (idx == 0? 0 : ((targetSeconds - startSeconds) / 1000));  //convert second
+
+               if (idx === 0) {
+                 startTime = time;
+                 startSeconds = targetSeconds;
+               }
+
+               //ele interpolate
+               sumEle += (ele?parseFloat(ele) : 0);
+
+               var avgEle = sumEle / (idx+1);
 
                czmlData[1].position.cartographicDegrees.push(deffSeconds);
                czmlData[1].position.cartographicDegrees.push(lon);
                czmlData[1].position.cartographicDegrees.push(lat);
-               czmlData[1].position.cartographicDegrees.push(ele);
+               czmlData[1].position.cartographicDegrees.push(ele? parseFloat(ele) : avgEle);
 
                if (idx == (trkPts.length -1)) {
                  czmlData[0].clock.interval = startTime + '/' + time;
