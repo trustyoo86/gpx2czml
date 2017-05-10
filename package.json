@@ -4,6 +4,11 @@
   "description": "gpx to czml converter module",
   "main": "index.js",
   "license": "MIT",
+  "author": "HanseungYoo (trustyoo86@gmail.com)",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/trustyoo86/gpx2czml.git"
+  },
   "scripts": {
     "test": "karma start"
   },
