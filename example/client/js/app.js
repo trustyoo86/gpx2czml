@@ -1,6 +1,5 @@
 angular.module('exampleApp', [
-  'ngRoute',
-  'ngGpx2czml'
+  'ngRoute'
 ])
   .config(function ($routeProvider) {
     $routeProvider
@@ -12,7 +11,7 @@ angular.module('exampleApp', [
           redirectTo: '/main'
       });
   })
-  .controller('mainController', function ($scope, gpx2czml) {
+  .controller('mainController', function ($scope) {
     console.log('main');
     //handle gpx file
     $scope.handleFile = function (e) {

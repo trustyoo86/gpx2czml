@@ -182,6 +182,7 @@
           }
         }, {
           position : {
+            epoch : startTime,
             cartographicDegrees : []
           }
         }];
@@ -198,12 +199,13 @@
               deffSeconds = (targetSeconds - startSeconds) / 1000;  //convert second
 
           czmlData[1].position.cartographicDegrees.push(deffSeconds);
-          czmlData[1].position.cartographicDegrees.push(lat);
           czmlData[1].position.cartographicDegrees.push(lon);
+          czmlData[1].position.cartographicDegrees.push(lat);
           czmlData[1].position.cartographicDegrees.push(ele);
 
           if (idx == (trkPts.length -1)) {
             czmlData[0].clock.interval = startTime + '/' + time;
+            czmlData[1].availability = startTime + '/' + time;
           }
         }
 

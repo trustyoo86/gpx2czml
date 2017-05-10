@@ -133,12 +133,17 @@
              var gpxNode = xml.getElementsByTagName('gpx')[0];
 
              //bind czmldata
-             this.bindCzmlData(gpxNode, function (isError, czmlData) {
-               typeof cbFunc == "function" && cbFunc(isError, czmlData);
-             });
+            //  this.bindCzmlData(gpxNode, function (isError, czmlData) {
+            //    typeof cbFunc == "function" && cbFunc(isError, czmlData);
+            //  });
+             this.parseXml(gpxNode);
            } catch (e) {
              typeof cbFunc == "function" && cbFunc(true, e.toString());
            }
+         },
+
+         parseXml : function (node) {
+           console.log(node);
          },
 
          /**
@@ -202,12 +207,13 @@
                    deffSeconds = (targetSeconds - startSeconds) / 1000;  //convert second
 
                czmlData[1].position.cartographicDegrees.push(deffSeconds);
-               czmlData[1].position.cartographicDegrees.push(lat);
                czmlData[1].position.cartographicDegrees.push(lon);
+               czmlData[1].position.cartographicDegrees.push(lat);
                czmlData[1].position.cartographicDegrees.push(ele);
 
                if (idx == (trkPts.length -1)) {
                  czmlData[0].clock.interval = startTime + '/' + time;
+                 czmlData[1].availability = startTime + '/' + time;
                }
              }
 
