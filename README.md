@@ -23,6 +23,13 @@ gpx2czml.js can use the general javascript versions gpx2czml.js and ng-gpx2czml.
 각 버전은 dist폴더 내의 pure 및 angular 폴더에 위치하고 있습니다.<br/>
 Each version is located in the pure and angular folders in the dist folder.
 
+Browser Support
+----
+
+- IE : 10+
+- Chrome, Firefox, Safari
+
+
 #### HTML
 ```html
 //pure javascript
