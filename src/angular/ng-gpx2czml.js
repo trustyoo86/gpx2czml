@@ -173,6 +173,7 @@
              var metaData = gpxNode.getElementsByTagName('metadata')[0], //metadata
                  trkContent = gpxNode.getElementsByTagName('trk')[0],  //tracking data
                  trkSeg = trkContent.getElementsByTagName('trkseg')[0],  //trkseg
+                 eles = trkContent.getElementsByTagName('ele'),
                  trkPts = trkSeg.getElementsByTagName('trkpt');  //tracking point arrays
 
              //get start time
@@ -196,6 +197,14 @@
                }
              }];
 
+             for(var idx=0; idx < eles.length; idx++) {
+               var eleInfo = parseFloat(self.getTextTag(eles[idx]));
+
+               sumEle += eleInfo;
+             }
+
+             var avgEle = sumEle / (eles.length);
+
              //set cartographicDegrees info
              for(var idx=0; idx < trkPts.length; idx++) {
                var trkInfo = trkPts[idx],
@@ -211,15 +220,12 @@
                  startSeconds = targetSeconds;
                }
 
-               //ele interpolate
-               sumEle += (ele?parseFloat(ele) : 0);
-
                var avgEle = sumEle / (idx+1);
 
                czmlData[1].position.cartographicDegrees.push(deffSeconds);
                czmlData[1].position.cartographicDegrees.push(lon);
                czmlData[1].position.cartographicDegrees.push(lat);
-               czmlData[1].position.cartographicDegrees.push(ele? parseFloat(ele) : avgEle);
+               czmlData[1].position.cartographicDegrees.push(ele? parseFloat(ele) : Math.round(avgEle));
 
                if (idx == (trkPts.length -1)) {
                  czmlData[0].clock.interval = startTime + '/' + time;
