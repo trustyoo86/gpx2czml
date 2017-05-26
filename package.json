@@ -1,6 +1,6 @@
 {
   "name": "gpx2czml",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "gpx to czml converter module",
   "main": "index.js",
   "license": "MIT",
