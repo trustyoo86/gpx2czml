@@ -238,7 +238,9 @@
 
                if (idx == (trkPts.length -1)) {
                  czmlData[0].clock.interval = startTime + '/' + time;
+                 czmlData[0].clock.currentTime = startTime;
                  czmlData[1].availability = startTime + '/' + time;
+                 czmlData[1].position.epoch = startTime;
                }
              }
 
