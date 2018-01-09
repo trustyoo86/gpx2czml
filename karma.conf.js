@@ -1,3 +1,5 @@
+const webpackConfig = require('./webpack.config');
+
 // Karma configuration
 // Generated on Mon May 08 2017 16:29:48 GMT+0900 (KST)
 
@@ -9,38 +11,43 @@ module.exports = function(config) {
 
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-    frameworks: ['mocha', 'browserify'],
-
-    plugins : [
-      'karma-mocha',
-      'karma-chrome-launcher',
-      'karma-browserify'
-    ],
+    frameworks: ['mocha', 'chai', 'phantomjs-shim'],
 
     // list of files / patterns to load in the browser
     files: [
-      'node_modules/chai/chai.js',
-      'dist/**/*.js',
-      'test/**/*.test.js'
+      'test/**/*.spec.ts'
     ],
-
 
     // list of files to exclude
     exclude: [
+      '**/*.swp'
     ],
-
-
-    // preprocess matching files before serving them to the browser
-    // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
-    preprocessors: {
-      'test/**/*.test.js' : ['browserify']
-    },
 
     // test results reporter to use
     // possible values: 'dots', 'progress'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-    reporters: ['progress'],
+    reporters: ['verbose', 'spec'],
 
+    failOnEmptyTestSuite: false,
+
+    webpack: {
+      devtool: 'eval-source-map',
+      module: webpackConfig.module,
+      resolve: webpackConfig.resolve
+    },
+
+    webpackMiddleware: {
+      quiet: true,
+      stats: {
+        colors: true
+      }
+    },
+
+    // preprocess matching files before serving them to the browser
+    // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
+    preprocessors: {
+      'test/**/*.spec.ts' : ['webpack', 'sourcemap']
+    },
 
     // web server port
     port: 9876,
@@ -61,16 +68,12 @@ module.exports = function(config) {
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: ['Chrome'],
+    browsers: ['PhantomJS'],
 
     browserConsoleLogOptions : {
       level : 'log',
       format : '%b %T: %m',
       terminal : true
-    },
-
-    browserify : {
-      debug : true,
     },
 
     // Continuous Integration mode

@@ -3,7 +3,7 @@
 var expect = chai.expect;
 
 var should = require('should');
-var gpx2czml = require('../dist/pure/gpx2czml');
+var gpx2czml = require('../dist/gpx2czml');
 var sinon = require('sinon');
 var $ = require('jquery');
 
