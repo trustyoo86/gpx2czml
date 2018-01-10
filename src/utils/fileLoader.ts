@@ -24,20 +24,19 @@ const fileLoader = {
    */
   bindBinary(): void {
     FileReader.prototype.readAsBinaryString = function(fileData: any) {
-      let binary = "";
-      const pt = this;
-      const reader = new FileReader();
+      let binary: string = '';
+      const reader: any = new FileReader();
       // file reader onload event
       reader.onload = (e: object): void => {
-        var bytes = new Uint8Array(reader.result);
-        var length = bytes.byteLength;
+        const bytes: any = new Uint8Array(reader.result);
+        const length: number = bytes.byteLength;
         for (var i = 0; i < length; i++) {
           binary += String.fromCharCode(bytes[i]);
         }
           //pt.result  - readonly so assign binary
-        pt.content = binary;
-        const event = new Event('onload');
-        pt.dispatchEvent(event);
+        this.content = binary;
+        const event: object = new Event('onload');
+        this.dispatchEvent(event);
       }
       reader.readAsArrayBuffer(fileData);
     };   
