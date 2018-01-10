@@ -27,7 +27,7 @@ const config = {
       {
         test: /\.ts$/,
         use: [
-          'ts-loader'
+          'awesome-typescript-loader'
         ]
       }
     ]
