@@ -12,13 +12,13 @@
   "scripts": {
     "clean": "rimraf dist",
     "test": "mocha ./test/gpx2czml.spec.js --watch",
-    "dev": "webpack --config ./tools/development.js",
-    "prod": "webpack --config ./tools/production.js"
+    "dev": "npm run clean && webpack --config ./tools/development.js --watch",
+    "prod": "npm run clean && webpack --config ./tools/production.js"
   },
   "dependencies": {
+    "@babel/core": "^7.2.2",
     "Promise": "^1.0.5",
     "all": "^0.0.0",
-    "angular": "^1.6.4",
     "babel-loader": "^8.0.5",
     "browserify": "^14.3.0",
     "jquery": "^3.2.1",
@@ -31,15 +31,12 @@
     "should": "^11.2.1",
     "sinon": "^2.2.0",
     "superagent": "^3.5.2",
-    "vinyl-buffer": "^1.0.0",
-    "vinyl-source-stream": "^1.1.0",
     "watchify": "^3.9.0",
     "webpack": "^4.28.4",
     "webpack-cli": "^3.2.1",
     "webpack-merge": "^4.2.1"
   },
   "devDependencies": {
-    "angular-router": "^0.0.2",
     "babel-register": "^6.26.0",
     "body-parser": "^1.17.1",
     "chai": "^3.5.0",
