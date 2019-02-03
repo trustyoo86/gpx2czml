@@ -1,6 +1,7 @@
 'use strict';
 
 const _ = require('lodash');
+
 // if (FileReader && !FileReader.prototype.readAsBinaryString) {
 //   FileReader.prototype.readAsBinaryString = function (fileData) {
 //     let binary = '';
@@ -19,10 +20,6 @@ const _ = require('lodash');
 //     reader.readAsArrayBuffer(fileData);
 //   };
 // }
-
-function async() {
-
-}
 
 function hasDOMParser() {
   return !!window.DOMParser;
