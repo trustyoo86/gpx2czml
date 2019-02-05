@@ -1,5 +1,6 @@
 # gpx2czml
-----
+[![Build Status](https://travis-ci.org/trustyoo86/gpx2czml.svg?branch=master)](https://travis-ci.org/trustyoo86/gpx2czml)
+
 
 *gpx2czml is updated 1.0.0. previous version is deprecated.*
 
