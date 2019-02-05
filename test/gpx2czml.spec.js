@@ -2,13 +2,16 @@
 
 require('babel-register');
 
-const jsdom = require('mocha-jsdom');
-const server = require('./test-server');
+const jsdom = require('jsdom');
+const { JSDOM } = jsdom;
 const fs = require('fs');
 
-jsdom({
+const dom = new JSDOM(`<!doctype html><html><body></body></html>`, {
   url: 'http://localhost',
 });
+
+global.window = dom.window;
+global.FileReader = global.window.FileReader;
 
 const path = require('path');
 const gpx2czml = require('../src/gpx2czml');
@@ -68,11 +71,11 @@ describe('[gpx2czml]', () => {
 
   describe('[async test]', () => {
     it('if url is not defined, async function must return error string', () => {
-      expect(g2c.async().message).to.be.equal('url is not defined.');
+      expect(g2c.asyncFromAjax().message).to.be.equal('url is not defined.');
     });
     
     it('if url type is not string, async function must return error', () => {
-      expect(g2c.async(1) instanceof Error).to.be.equal(true);
+      expect(g2c.asyncFromAjax(1) instanceof Error).to.be.equal(true);
     });
   });
 
@@ -86,7 +89,8 @@ describe('[gpx2czml]', () => {
       });
     });
 
-    describe('[parseGpx test]', () => {
+    describe('[parseGpx test]', function() {
+      this.timeout(50000);
       it('parseGpx should return xml data', () => {
         expect(typeof g2c.parseGpx(gpxData)).to.be.equal('object');
       });
@@ -94,9 +98,9 @@ describe('[gpx2czml]', () => {
 
     describe('[getAttrs test]', () => {
       let attrFunc;
-  
+      
       before((done) => {
-        attrFunc = _.flowRight(g2c.getAttr, g2c.parseGpx)(gpxData);
+        attrFunc = _.flowRight(g2c.getAttr, g2c.getGpxEls)(gpxData);
         done();
       });
   
@@ -113,7 +117,7 @@ describe('[gpx2czml]', () => {
       let elsFunc;
   
       before((done) => {
-        elsFunc = _.flowRight(g2c.getEls, g2c.parseGpx)(gpxData);
+        elsFunc = _.flowRight(g2c.getEls, g2c.getGpxEls)(gpxData);
         done();
       });
   
@@ -126,7 +130,7 @@ describe('[gpx2czml]', () => {
       let elsFunc;
 
       before((done) => {
-        elsFunc = _.flowRight(g2c.getEls, g2c.parseGpx)(gpxData);
+        elsFunc = _.flowRight(g2c.getEls, g2c.getGpxEls)(gpxData);
         done();
       });
 

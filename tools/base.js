@@ -13,7 +13,6 @@ module.exports = {
     path: path.resolve(absolutePath, 'dist'),
     libraryTarget: 'umd',
     library: 'gpx2czml',
-    libraryExport: 'default',
   },
   module: {
     rules: [
