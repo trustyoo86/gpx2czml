@@ -4,7 +4,7 @@ node_js:
   - "8.10.0"
 branches:
   only:
-    - master
+    - test
 email:
   on_failure: change
   on_success: never
