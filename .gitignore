@@ -33,3 +33,6 @@ pages/.DS_Store
 .idea
 app/styles/main.css
 *.map
+
+# nyc
+.nyc_output
