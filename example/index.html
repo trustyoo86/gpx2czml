@@ -7,6 +7,10 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <script
+      src="https://code.jquery.com/jquery-1.12.4.js"
+      integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU="
+      crossorigin="anonymous"></script>
   </head>
   <body>
     <nav class="navbar navbar-light bg-light">
@@ -18,7 +22,7 @@
           <div class="card" style="width:100%; padding:10px;">
             <h6>select gpx file</h6>
             <div class="custom-file">
-              <input type="file" class="custom-file-input" id="validatedCustomFile" required>
+              <input type="file" class="custom-file-input" id="validatedCustomFile" required data-input="filereader">
               <label class="custom-file-label" for="validatedCustomFile">Choose file...</label>
               <div class="invalid-feedback">Example invalid custom file feedback</div>
             </div>
@@ -26,12 +30,13 @@
           <div class="card" style="padding:10px;margin-top: 50px;">
             <h6>convert czml data</h6>
             <div class="form-group">
-              <textarea class="form-control" readonly></textarea>
+              <textarea style="font-size:10px;" class="form-control" data-input="json" rows="25" readonly></textarea>
             </div>
           </div>
         </div>
       </div>
     </div>
     <script src="../dist/gpx2czml.js"></script>
+    <script src="./client.js"></script>
   </body>
 </html>
