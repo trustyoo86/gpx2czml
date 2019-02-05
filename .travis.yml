@@ -16,3 +16,5 @@ git:
 script:
   - npm run test
   - npm run prod
+after_success:
+  - npm run coveralls
