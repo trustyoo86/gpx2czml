@@ -9,6 +9,14 @@
     "type": "git",
     "url": "https://github.com/trustyoo86/gpx2czml.git"
   },
+  "keywords": [
+    "gpx",
+    "cesiumjs",
+    "3d",
+    "javascript",
+    "es6",
+    "czml"
+  ],
   "scripts": {
     "clean": "rimraf dist",
     "test": "nyc mocha ./test/gpx2czml.spec.js",
