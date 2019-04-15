@@ -15,11 +15,6 @@ czml로 변환한 데이터는 Cesium.js에 활용될 수 있습니다.<br/>
 The data converted to czml can be used for Cesium.js.
 
 ## 설치(Setup)
-gpx2czml.js는 두가지 방법으로 설치 가능합니다.<br/>
-gpx2czml.js can be installed in two ways.
-
-gpx2czml.js는 일반 javascript 버전인 gpx2czml.js 및 angular js를 이용한 ng-gpx2czml.js 를 사용하실 수 있습니다.<br/>
-gpx2czml.js can use the general javascript versions gpx2czml.js and ng-gpx2czml.js using angular js.
 
 ## Browser Support
 
@@ -42,14 +37,7 @@ javascript install
 
 ```js
 //pure javascript
-var gpx2czml = require('dist/pure/gpx2czml');
-
-//angular
-require('dist/angular/ng-gpx2czml');
-
-angular.module('myApp', [
-  'ngGpx2czml'
-]);
+var gpx2czml = require('gpx2czml');
 ```
 
 ## 사용법(Usage)
@@ -93,6 +81,7 @@ If there are no errors, the czml JSON object is returned.
 ### 2) asyncFromFile
 
 input file 태그를 사용하여 gpx 파일을 업로드 하여 사용하실 수 있습니다. 사용 방법은 다음과 같습니다.
+You can use gpx2czml using input tag. Here is usage that use input tag.
 
 ###### HTML
 ```html
