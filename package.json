@@ -1,8 +1,8 @@
 {
   "name": "gpx2czml",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "gpx to czml converter module",
-  "main": "dist/pure/gpx2czml.min.js",
+  "main": "dist/gpx2czml.js",
   "license": "MIT",
   "author": "HanseungYoo (trustyoo86@gmail.com)",
   "repository": {
