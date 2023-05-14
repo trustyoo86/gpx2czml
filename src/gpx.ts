@@ -20,5 +20,5 @@ class Gpx {
     return (key: string) => this.node.getElementsByTagName(key)[0];
   }
 
-
+  
 }
