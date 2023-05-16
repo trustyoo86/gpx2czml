@@ -70,7 +70,7 @@ module.exports = {
     semi: 'error',
     'no-inline-comments': 'warn',
     'no-debugger': 'error',
-    'no-console': 'warn',
+    'no-console': 'off',
     'no-empty': 'warn',
     'no-spaced-func': 'warn',
     'no-array-constructor': 'error',
