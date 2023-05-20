@@ -48,7 +48,7 @@ module.exports = {
     'brace-style': ['error', '1tbs', { allowSingleLine: true }],
     indent: ['error', 2, { SwitchCase: 1 }],
     'valid-jsdoc': [
-      'warn',
+      'off',
       {
         requireReturn: false,
         preferType: {

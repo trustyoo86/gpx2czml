@@ -13,13 +13,12 @@ if (FileReader && !FileReader.prototype.readAsBinaryString) {
       for (let i = 0; i < length; i++) {
         binary += String.fromCharCode(bytes[i]);
       }
-        //pt.result  - readonly so assign binary
+      //pt.result  - readonly so assign binary
       pt.content = binary;
-    }
+    };
     reader.readAsArrayBuffer(fileData);
   };
 }
-
 
 function hasDOMParser() {
   return !!window.DOMParser;
@@ -56,7 +55,7 @@ function getHttpRequest(isXmlHttpRequest, isActiveXObject) {
 
 /**
  * data process from file
- * 
+ *
  * @param {Object} file file object
  * @param {Function} callback function after file processing
  */
@@ -73,7 +72,7 @@ async function asyncFromFile(files, callback) {
 
 /**
  * process file reader
- * 
+ *
  * @param {Object} ev event object
  * @param {Function} callback callback function after file event
  */
@@ -84,29 +83,29 @@ function processingFiles(ev, callback) {
   return new Promise((resolve, reject) => {
     try {
       const files = ev.target.files;
-  
+
       reader.onload = function (e) {
         let data;
-  
+
         if (!e) {
           data = reader.content;
           browser = 'ie';
         } else {
           data = e.target.result;
         }
-  
+
         resolve({
           isError: false,
           data,
         });
-      }
-  
+      };
+
       if (files.length > 0) {
         reader.readAsText(files[0], 'UTF-8');
       } else {
         throw new Error('file is not defined');
       }
-    } catch(e) {
+    } catch (e) {
       reject({
         isError: true,
         data: e.toString(),
@@ -117,7 +116,7 @@ function processingFiles(ev, callback) {
 
 /**
  * asnyc gpx data
- * 
+ *
  * @param {string} url url string
  * @param {Function} callback callback function after parse gpx data
  */
@@ -126,19 +125,22 @@ function asyncFromAjax(url, callback) {
     if (!url) {
       throw new Error('url is not defined.');
     }
-    
+
     if (typeof url !== 'string') {
       throw new Error('url type is not string.');
     }
 
-    const httpRequest = _.curryRight(getHttpRequest)(isActiveXObject)(isXMLHttpRequest);
+    const httpRequest =
+      _.curryRight(getHttpRequest)(isActiveXObject)(isXMLHttpRequest);
 
     const getGpxData = () => {
       if (httpRequest.readyState === 4) {
         if (httpRequest.status === 200) {
-          typeof callback === 'function' && callback(false, parseGpx(httpRequest.responseText));
+          typeof callback === 'function' &&
+            callback(false, parseGpx(httpRequest.responseText));
         } else {
-          typeof callback === 'function' && callback(true, 'async gpx data error');
+          typeof callback === 'function' &&
+            callback(true, 'async gpx data error');
         }
       }
     };
@@ -154,7 +156,7 @@ function asyncFromAjax(url, callback) {
 
 /**
  * parse gpx data
- * 
+ *
  * @param {Object} data gpx data
  * @return {*} parsed data
  */
@@ -174,7 +176,7 @@ function parseGpx(data) {
 
 /**
  * get gpx elements
- * 
+ *
  * @param {Object} data data object
  * @return {Element} gpx element
  */
@@ -195,7 +197,7 @@ function getGpxEls(data) {
 
 /**
  * get elements
- * 
+ *
  * @param {Element} node target element
  * @return {Function} return element data using key
  */
@@ -204,18 +206,18 @@ function getEls(node) {
 
   /**
    * return gpx node
-   * 
+   *
    * @param {string} key search key
    * @return {Element} target node element
    */
-  return (key) => {
+  return key => {
     return gpxNode.getElementsByTagName(key)[0];
   };
 }
 
 /**
  * get attributes
- * 
+ *
  * @param {Element} node target element
  * @return {Function} return element attribute function
  */
@@ -224,18 +226,18 @@ function getAttr(node) {
 
   /**
    * return node's attribute
-   * 
+   *
    * @param {string} key search element attribute key
    * @return {string} search element's attribute
    */
-  return (key) => {
+  return key => {
     return gpxNode.getAttribute(key);
   };
 }
 
 /**
  * get text in tag
- * 
+ *
  * @param {Element} tag element
  * @return {string} text in tag
  */
@@ -252,13 +254,13 @@ function getTextTag(tag) {
 
 /**
  * bind czml converted data
- * 
+ *
  * @param {Element} gpxNode gpx node element
  * @return {Object} gpx node data
  */
 function bindCzmlData(gpxNode) {
   let sumEle = 0;
-  
+
   try {
     const elsFunc = getEls(gpxNode);
     const gpxAttrFunc = getAttr(gpxNode);
@@ -281,7 +283,8 @@ function bindCzmlData(gpxNode) {
           multiplier: 1,
           range: 'CLAMPED',
         },
-      }, {
+      },
+      {
         position: {
           cartographicDegrees: [],
         },
@@ -295,7 +298,7 @@ function bindCzmlData(gpxNode) {
       const pointAttrs = makeTrkPointArrs(targetAttrFunc, targetElsFunc);
       const { time, ele, lat, lon } = pointAttrs;
       const targetSeconds = new Date(time).getTime();
-      const diffSeconds = (idx === 0? 0 : ((targetSeconds - startSeconds) / 1000));
+      const diffSeconds = idx === 0 ? 0 : (targetSeconds - startSeconds) / 1000;
 
       if (idx === 0) {
         startTime = time;
@@ -303,10 +306,12 @@ function bindCzmlData(gpxNode) {
       }
 
       if (ele) {
-        currentEle = pointAttrs
+        currentEle = pointAttrs;
       } else {
         const nextPts = trkPts[idx + 1];
-        const nextEle = nextPts ? getTextTag(nextPts.getElementsByTagName('ele')[0]) : null;
+        const nextEle = nextPts
+          ? getTextTag(nextPts.getElementsByTagName('ele')[0])
+          : null;
 
         for (let eidx = 0; eidx < trkPts.length; eidx++) {
           const targetEle = getTextTag(eleInfo.getElementsByTagName('ele')[0]);
@@ -318,10 +323,19 @@ function bindCzmlData(gpxNode) {
         }
       }
 
-      const concatData = _.concat(czmlData[1].position.cartographicDegrees, [diffSeconds, lon, lat, (ele ? parseFloat(ele) : (nextEle? (currentEle + parseFloat(nextEle)) / 2 : currentEle))]);
+      const concatData = _.concat(czmlData[1].position.cartographicDegrees, [
+        diffSeconds,
+        lon,
+        lat,
+        ele
+          ? parseFloat(ele)
+          : nextEle
+          ? (currentEle + parseFloat(nextEle)) / 2
+          : currentEle,
+      ]);
       czmlData[1].position.cartographicDegrees = concatData;
 
-      if (idx === (trkPts.length - 1)) {
+      if (idx === trkPts.length - 1) {
         czmlData[0].clock.interval = `${startTime}/${time}`;
         czmlData[0].clock.currentTime = startTime;
         czmlData[1].availabbility = `${startTime}/${time}`;
@@ -333,7 +347,7 @@ function bindCzmlData(gpxNode) {
       isError: false,
       data: czmlData,
     };
-  } catch(e) {
+  } catch (e) {
     return {
       isError: true,
       errorType: 'bindCzmlData',
