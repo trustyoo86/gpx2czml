@@ -1,44 +1,36 @@
-class ElementUtil {
-  node: Element;
-  constructor(xmls: Element) {
-    if (!xmls) {
-      throw new Error('xmls error: gpx data is not defined.');
-    }
+/**
+ * get elements
+ * @param node Element
+ * @returns () => Element
+ */
+export const getElements = (node: Element) => {
+  const gpxNode = node;
 
-    this.node = xmls;
+  return (key: string): Element => gpxNode.getElementsByTagName(key)[0];
+};
+
+/**
+ * get node attributes
+ * @returns () => string | null
+ */
+export const getAttribute = (node: Element) => {
+  const targetNode = node;
+
+  return (key: string): string | null => targetNode.getAttribute(key);
+};
+
+/**
+ * get text in tag
+ * @param tag tag element
+ * @returns text string
+ */
+export const getTextTag = (tag: Element): string | null => {
+  try {
+    const tagStr = tag.textContent;
+    tagStr?.replace(/(^\s*)|(\s*$)/gi, '');
+
+    return tagStr;
+  } catch (e) {
+    return null;
   }
-
-  /**
-   * get node elements
-   * @returns {Function} return element data using key
-   */
-  getElements() {
-    /**
-     * @params key search key
-     * @returns {Element} element after search
-     */
-    return (key: string): Element => this.node.getElementsByTagName(key)[0];
-  }
-
-  getAttribute() {
-    return (key: string): string | null => this.node.getAttribute(key);
-  }
-
-  /**
-   * Get text in tag
-   * @params tag tag element
-   * @returns tag string
-   */
-  getTextTag(tag: Element): string | null {
-    try {
-      const tagStr = tag.textContent;
-      tagStr?.replace(/(^\s*)|(\s*$)/gi, '');
-
-      return tagStr;
-    } catch (e) {
-      return null;
-    }
-  }
-}
-
-export default ElementUtil;
+};

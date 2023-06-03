@@ -1,4 +1,4 @@
-import ElementUtil from './ElementUtil';
+import { getElements, getAttribute } from './ElementUtil';
 
 class Gpx {
   private hasDOMParser: boolean;
@@ -10,7 +10,7 @@ class Gpx {
    * Make window DOM parser
    * @returns window.DOMParser
    */
-  makeDOMParser(): InstanceType<typeof window.DOMParser> {
+  makeDOMParser(): InstanceType<typeof window.DOMParser> | undefined {
     let tmp;
     if (this.hasDOMParser) {
       tmp = new window.DOMParser();
@@ -41,6 +41,48 @@ class Gpx {
       console.log('element');
     } catch (e) {
       return e;
+    }
+  }
+
+  bindCzmlData(gpxNode: Element) {
+    try {
+      const elsFn = getElements(gpxNode);
+      const trkContent = elsFn('trk');
+      const trkFn = getElements(trkContent);
+      const trkSeg = trkFn('trkseg');
+      const trkPts = trkSeg.getElementsByTagName('trkpt');
+
+      let startTime, startSeconds, currentEle;
+
+      const czmlData = [
+        {
+          name: elsFn('creator'),
+          version: elsFn('version'),
+          clock: {
+            interval: null,
+            currentTime: startTime,
+            multiplier: 1,
+            range: 'CLAMPED',
+          },
+        },
+        {
+          position: {
+            cartographicDegrees: [],
+          },
+        },
+      ];
+
+      for (let idx = 0, len = trkPts.length; idx < len; idx++) {
+        const element = trkPts[idx];
+        const targetAttrFunc = getAttribute(element);
+        const targetElsFunc = getElements(element);
+      }
+    } catch (e: any) {
+      return {
+        isError: true,
+        errorType: 'bindCzmlData',
+        data: e.toString(),
+      };
     }
   }
 
