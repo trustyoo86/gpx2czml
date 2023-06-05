@@ -53,4 +53,56 @@ function asyncFromApi(url: string, callback: Function) {
   }
 }
 
-export { asyncFromApi };
+/**
+ * get data from file
+ * @param files Event
+ * @param callback callback data
+ */
+async function asyncFromFile(files: Event, callback: Function) {
+  const result = await processingFiles(files);
+
+  if (!result.isError) {
+    const gpx = new Gpx();
+    const czmlData = gpx.parseGpx(result.data as string);
+    typeof callback === 'function' && callback(false, czmlData);
+  } else {
+    typeof callback === 'function' && callback(result.isError, result.data);
+  }
+}
+
+/**
+ * process in files
+ * @param ev Event
+ * @returns result data
+ */
+function processingFiles(
+  ev: Event,
+): Promise<{ isError: boolean; data: string }> {
+  const reader = new FileReader();
+
+  return new Promise((resolve, reject) => {
+    try {
+      const files = (ev.target as HTMLInputElement).files;
+
+      reader.onload = function (event) {
+        resolve({
+          isError: false,
+          data: event.target?.result as string,
+        });
+      };
+
+      if (files && files.length > 0) {
+        reader.readAsText(files[0], 'UTF-8');
+      } else {
+        throw new Error('File is not defined.');
+      }
+    } catch (error: any) {
+      reject({
+        isError: true,
+        data: error.toString(),
+      });
+    }
+  });
+}
+
+export { asyncFromApi, asyncFromFile };
