@@ -18,10 +18,10 @@
     "czml"
   ],
   "scripts": {
+    "dev": "tsc && vite dev",
     "build": "tsc && vite build",
     "clean": "rimraf dist",
     "test": "nyc mocha ./test/gpx2czml.spec.js",
-    "dev": "npm run clean && webpack --config ./tools/development.js --watch",
     "prod": "npm run clean && webpack --config ./tools/production.js",
     "coveralls": "npm run cover -- --report lcovonly && cat ./coverage/lcov.info | coveralls",
     "log:patch": "changelog -p",
