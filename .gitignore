@@ -28,6 +28,7 @@ bower_components
 # Build files
 build
 pages/.DS_Store
+dist
 
 #webstorm
 .idea
