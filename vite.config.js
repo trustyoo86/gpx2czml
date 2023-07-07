@@ -12,7 +12,7 @@ export default {
     lib: {
       entry: path.resolve(__dirname, 'src/index.ts'),
       fileName: 'index',
-      formats: ['es', 'cjs'],
+      formats: ['esm', 'cjs'],
     },
     rollupOptions: {
       external: [],
