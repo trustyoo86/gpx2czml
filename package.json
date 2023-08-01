@@ -22,6 +22,7 @@
   "scripts": {
     "dev": "tsc && vite dev",
     "build": "tsc && vite build",
+    "build:prod": "NODE_ENV=production yarn build",
     "clean": "rimraf dist",
     "test": "nyc mocha ./test/gpx2czml.spec.js",
     "prod": "npm run clean && webpack --config ./tools/production.js",
@@ -64,6 +65,7 @@
     "prettier": "^2.8.8",
     "rollup-plugin-typescript-paths": "^1.4.0",
     "superagent-xml2jsparser": "^0.1.1",
+    "terser": "^5.19.2",
     "tslib": "^2.5.0",
     "typescript": "^5.0.4",
     "vite": "^4.3.5"
