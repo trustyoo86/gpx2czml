@@ -7,7 +7,7 @@ export default {
   build: {
     outDir: 'dist',
     manifest: true,
-    minify: true,
+    minify: process.env.NODE_ENV === 'production' ? 'terser' : false,
     reportCompressedSize: true,
     lib: {
       entry: path.resolve(__dirname, 'src/index.ts'),
