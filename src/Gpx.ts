@@ -7,6 +7,26 @@ interface TrkPoint {
   time: string | null;
 }
 
+type TCzmlData = [
+  {
+    name: Element;
+    version: Element;
+    clock: {
+      interval: string | null;
+      currentTime?: string | null;
+      multiplier: number;
+      range: string;
+    };
+  },
+  {
+    availabbility?: string;
+    position: {
+      cartographicDegrees: any[];
+      epoch?: string | null;
+    };
+  },
+];
+
 class Gpx {
   private hasDOMParser: boolean;
   constructor() {
@@ -67,7 +87,7 @@ class Gpx {
         startSeconds = 0,
         currentEle;
 
-      const czmlData = [
+      const czmlData: TCzmlData = [
         {
           name: elsFn('creator'),
           version: elsFn('version'),
@@ -142,17 +162,12 @@ class Gpx {
           ],
         ];
         /* eslint-enable */
-        // @ts-ignore
         czmlData[1].position.cartographicDegrees = concatData;
 
         if (idx === trkPts.length - 1) {
-          // @ts-ignore
           czmlData[0].clock.interval = `${startTime}/${time}`;
-          // @ts-ignore
           czmlData[0].clock.currentTime = startTime;
-          // @ts-ignore
           czmlData[1].availabbility = `${startTime}/${time}`;
-          // @ts-ignore
           czmlData[1].position.epoch = startTime;
         }
       }
