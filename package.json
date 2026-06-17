@@ -1,57 +1,47 @@
 {
   "name": "gpx2czml",
-  "version": "1.0.6",
+  "version": "2.0.0",
   "description": "gpx to czml converter module",
-  "main": "dist/gpx2czml.js",
+  "type": "module",
   "license": "MIT",
   "author": "HanseungYoo (trustyoo86@gmail.com)",
   "repository": {
     "type": "git",
     "url": "https://github.com/trustyoo86/gpx2czml.git"
   },
-  "keywords": [
-    "gpx",
-    "cesiumjs",
-    "3d",
-    "javascript",
-    "es6",
-    "czml"
-  ],
+  "keywords": ["gpx", "cesiumjs", "3d", "typescript", "czml"],
+  "main": "./dist/gpx2czml.cjs",
+  "module": "./dist/gpx2czml.js",
+  "types": "./dist/index.d.ts",
+  "unpkg": "./dist/gpx2czml.umd.js",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/gpx2czml.js",
+      "require": "./dist/gpx2czml.cjs",
+      "default": "./dist/gpx2czml.umd.js"
+    }
+  },
+  "files": ["dist"],
+  "sideEffects": false,
   "scripts": {
-    "clean": "rimraf dist",
-    "test": "nyc mocha ./test/gpx2czml.spec.js",
-    "dev": "npm run clean && webpack --config ./tools/development.js --watch",
-    "prod": "npm run clean && webpack --config ./tools/production.js",
-    "coveralls": "npm run cover -- --report lcovonly && cat ./coverage/lcov.info | coveralls",
-    "log:patch": "changelog -p",
-    "log:minor": "changelog -m",
-    "log:major": "changelog -M",
-    "log:file": "changelog -f"
+    "build": "vite build",
+    "dev": "vite build --watch",
+    "test": "vitest run",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@babel/core": "^7.5.5",
-    "Promise": "^1.0.5",
-    "all": "^0.0.0",
-    "babel-loader": "^8.0.6",
-    "jquery": ">=3.4.1",
-    "lodash": "^4.17.15",
-    "mocha": "^6.2.0",
-    "nyc": "^14.1.1",
-    "path": "^0.12.7",
-    "should": "^13.2.3",
-    "sinon": "^7.4.1",
-    "webpack": "^4.39.1",
-    "webpack-cli": "^3.3.6",
-    "webpack-merge": "^4.2.1"
+    "@xmldom/xmldom": "^0.9.0"
   },
   "devDependencies": {
-    "babel-register": "^6.26.0",
-    "chai": "^4.2.0",
-    "coveralls": "^3.0.6",
-    "generate-changelog": "^1.8.0",
-    "istanbul": "^0.4.5",
-    "jsdom": "^15.1.1",
-    "mocha-lcov-reporter": "^1.3.0",
-    "superagent-xml2jsparser": "^0.1.1"
+    "@eslint/js": "^9.0.0",
+    "eslint": "^9.0.0",
+    "jsdom": "^24.0.0",
+    "typescript": "^5.4.0",
+    "typescript-eslint": "^8.0.0",
+    "vite": "^5.2.0",
+    "vite-plugin-dts": "^3.9.0",
+    "vitest": "^1.5.0"
   }
 }
