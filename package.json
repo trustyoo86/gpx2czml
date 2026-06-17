@@ -7,7 +7,7 @@
   "author": "HanseungYoo (trustyoo86@gmail.com)",
   "repository": {
     "type": "git",
-    "url": "https://github.com/trustyoo86/gpx2czml.git"
+    "url": "git+https://github.com/trustyoo86/gpx2czml.git"
   },
   "keywords": ["gpx", "cesiumjs", "3d", "typescript", "czml"],
   "main": "./dist/gpx2czml.cjs",
