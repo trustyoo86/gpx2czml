@@ -1,24 +1,18 @@
-'use strict';
+import { parseGpx, asyncFromFile } from '../dist/gpx2czml.js';
 
-function initHandler() {
-  const fileReader = $('[data-input=filereader]');
-  fileReader.off('change').on('change', function (e) {
-    gpx2czml.asyncFromFile(e, function (isError, data) {
-      $('[data-input=json]').val(JSON.stringify(data, undefined, 4));
-      e.target.value = null;
-    });
+const out = document.getElementById('json');
+const show = (result) => {
+  out.value = JSON.stringify(result.isError ? result : result.data, null, 4);
+};
+
+document.getElementById('filereader').addEventListener('change', (e) => {
+  asyncFromFile(e, (_isError, result) => {
+    show(result);
+    e.target.value = null;
   });
-}
+});
 
-function initialize() {
-  initHandler();
-
-  gpx2czml.asyncFromAjax('../resources/584286793.gpx', function (isError, data) {
-    console.log('data', data);
-    $('[data-input=json]').val(JSON.stringify(data, undefined, 4));
-  });
-}
-
-$(() => {
-  initialize();
+document.getElementById('loadSample').addEventListener('click', async () => {
+  const gpx = await fetch('../resources/584286793.gpx').then((r) => r.text());
+  show(parseGpx(gpx));
 });
