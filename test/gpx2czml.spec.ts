@@ -143,6 +143,38 @@ describe('asyncFromFile', () => {
     }));
 });
 
+describe('edge cases', () => {
+  it('returns isError when gpx has no <trk>', () => {
+    const result = parseGpx('<?xml version="1.0"?><gpx creator="test" version="1.1"></gpx>');
+    expect(result.isError).toBe(true);
+    if (result.isError) expect(result.errorType).toBe('bindCzmlData');
+  });
+
+  it('handles an empty <trkseg>: no points, no interval, no availability', () => {
+    const result = parseGpx(buildGpx([]));
+    if (result.isError) throw new Error(result.data);
+    expect(result.data[1].position.cartographicDegrees).toEqual([]);
+    expect(result.data[0].clock.interval).toBeNull();
+    expect(result.data[1].availability).toBeUndefined();
+    expect(result.data[1].position.epoch).toBeUndefined();
+  });
+
+  it('handles a single track point: zero-length interval, offset 0', () => {
+    const result = parseGpx(buildGpx([{ lat: 1, lon: 2, ele: 3, time: '2020-01-01T00:00:00Z' }]));
+    if (result.isError) throw new Error(result.data);
+    expect(result.data[1].position.cartographicDegrees).toEqual([0, 2, 1, 3]);
+    expect(result.data[0].clock.interval).toBe('2020-01-01T00:00:00Z/2020-01-01T00:00:00Z');
+  });
+
+  it('reports error via callback when event is malformed', () => {
+    let isError: boolean | undefined;
+    asyncFromFile(undefined as never, (err) => {
+      isError = err;
+    });
+    expect(isError).toBe(true);
+  });
+});
+
 describe('time offsets', () => {
   it('encodes seconds elapsed since the first point', () => {
     const result = parseGpx(

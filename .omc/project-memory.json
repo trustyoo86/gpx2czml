@@ -1,0 +1,224 @@
+{
+  "version": "1.0.0",
+  "lastScanned": 1783783255239,
+  "projectRoot": "/Users/ian/workspace/gpx2czml",
+  "techStack": {
+    "languages": [
+      {
+        "name": "JavaScript/TypeScript",
+        "version": null,
+        "confidence": "high",
+        "markers": [
+          "package.json"
+        ]
+      },
+      {
+        "name": "TypeScript",
+        "version": null,
+        "confidence": "high",
+        "markers": [
+          "tsconfig.json"
+        ]
+      }
+    ],
+    "frameworks": [
+      {
+        "name": "vite",
+        "version": "5.2.0",
+        "category": "build"
+      },
+      {
+        "name": "vitest",
+        "version": "1.5.0",
+        "category": "testing"
+      }
+    ],
+    "packageManager": "yarn",
+    "runtime": null
+  },
+  "build": {
+    "buildCommand": "yarn build",
+    "testCommand": "yarn test",
+    "lintCommand": "yarn lint",
+    "devCommand": "yarn dev",
+    "scripts": {
+      "build": "vite build",
+      "dev": "vite build --watch",
+      "test": "vitest run",
+      "lint": "eslint .",
+      "typecheck": "tsc --noEmit"
+    }
+  },
+  "conventions": {
+    "namingStyle": "camelCase",
+    "importStyle": "ES modules",
+    "testPattern": "*.spec.ts",
+    "fileOrganization": null
+  },
+  "structure": {
+    "isMonorepo": false,
+    "workspaces": [],
+    "mainDirectories": [
+      "docs",
+      "src",
+      "test"
+    ],
+    "gitBranches": {
+      "defaultBranch": "master",
+      "branchingStrategy": null
+    }
+  },
+  "customNotes": [],
+  "directoryMap": {
+    "dist": {
+      "path": "dist",
+      "purpose": "Distribution/build output",
+      "fileCount": 4,
+      "lastAccessed": 1783783255164,
+      "keyFiles": [
+        "gpx2czml.cjs",
+        "gpx2czml.js",
+        "gpx2czml.umd.js",
+        "index.d.ts"
+      ]
+    },
+    "docs": {
+      "path": "docs",
+      "purpose": "Documentation",
+      "fileCount": 0,
+      "lastAccessed": 1783783255174,
+      "keyFiles": []
+    },
+    "example": {
+      "path": "example",
+      "purpose": null,
+      "fileCount": 2,
+      "lastAccessed": 1783783255174,
+      "keyFiles": [
+        "client.js",
+        "index.html"
+      ]
+    },
+    "resources": {
+      "path": "resources",
+      "purpose": null,
+      "fileCount": 2,
+      "lastAccessed": 1783783255174,
+      "keyFiles": [
+        "584286793.gpx",
+        "584286796.gpx"
+      ]
+    },
+    "src": {
+      "path": "src",
+      "purpose": "Source code",
+      "fileCount": 1,
+      "lastAccessed": 1783783255175,
+      "keyFiles": [
+        "index.ts"
+      ]
+    },
+    "test": {
+      "path": "test",
+      "purpose": "Test files",
+      "fileCount": 1,
+      "lastAccessed": 1783783255175,
+      "keyFiles": [
+        "gpx2czml.spec.ts"
+      ]
+    }
+  },
+  "hotPaths": [
+    {
+      "path": "test/gpx2czml.spec.ts",
+      "accessCount": 11,
+      "lastAccessed": 1783783665896,
+      "type": "file"
+    },
+    {
+      "path": "package.json",
+      "accessCount": 6,
+      "lastAccessed": 1783783741566,
+      "type": "file"
+    },
+    {
+      "path": "src/index.ts",
+      "accessCount": 4,
+      "lastAccessed": 1783783672410,
+      "type": "file"
+    },
+    {
+      "path": "example/index.html",
+      "accessCount": 3,
+      "lastAccessed": 1783783598104,
+      "type": "file"
+    },
+    {
+      "path": "example/client.js",
+      "accessCount": 3,
+      "lastAccessed": 1783783598586,
+      "type": "file"
+    },
+    {
+      "path": "vite.config.ts",
+      "accessCount": 3,
+      "lastAccessed": 1783783728741,
+      "type": "file"
+    },
+    {
+      "path": "README.md",
+      "accessCount": 2,
+      "lastAccessed": 1781704035228,
+      "type": "file"
+    },
+    {
+      "path": "eslint.config.js",
+      "accessCount": 2,
+      "lastAccessed": 1781704057183,
+      "type": "file"
+    },
+    {
+      "path": "src/gpx2czml.js",
+      "accessCount": 1,
+      "lastAccessed": 1781703290388,
+      "type": "file"
+    },
+    {
+      "path": "index.js",
+      "accessCount": 1,
+      "lastAccessed": 1781703290852,
+      "type": "file"
+    },
+    {
+      "path": "CONTEXT.md",
+      "accessCount": 1,
+      "lastAccessed": 1781703768310,
+      "type": "file"
+    },
+    {
+      "path": "tsconfig.json",
+      "accessCount": 1,
+      "lastAccessed": 1781703898593,
+      "type": "file"
+    },
+    {
+      "path": "playwright.config.ts",
+      "accessCount": 1,
+      "lastAccessed": 1783783708726,
+      "type": "file"
+    },
+    {
+      "path": "e2e/example.spec.ts",
+      "accessCount": 1,
+      "lastAccessed": 1783783714781,
+      "type": "file"
+    },
+    {
+      "path": "feedback/iteration-1.md",
+      "accessCount": 1,
+      "lastAccessed": 1783783801912,
+      "type": "file"
+    }
+  ],
+  "userDirectives": []
+}
