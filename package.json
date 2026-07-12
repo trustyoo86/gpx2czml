@@ -9,7 +9,13 @@
     "type": "git",
     "url": "git+https://github.com/trustyoo86/gpx2czml.git"
   },
-  "keywords": ["gpx", "cesiumjs", "3d", "typescript", "czml"],
+  "keywords": [
+    "gpx",
+    "cesiumjs",
+    "3d",
+    "typescript",
+    "czml"
+  ],
   "main": "./dist/gpx2czml.cjs",
   "module": "./dist/gpx2czml.js",
   "types": "./dist/index.d.ts",
@@ -22,12 +28,15 @@
       "default": "./dist/gpx2czml.umd.js"
     }
   },
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "sideEffects": false,
   "scripts": {
     "build": "vite build",
     "dev": "vite build --watch",
     "test": "vitest run",
+    "test:e2e": "playwright test",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit"
   },
@@ -36,6 +45,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.0.0",
+    "@playwright/test": "^1.61.1",
     "eslint": "^9.0.0",
     "jsdom": "^24.0.0",
     "typescript": "^5.4.0",

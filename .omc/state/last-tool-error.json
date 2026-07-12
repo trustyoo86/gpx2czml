@@ -1,0 +1,7 @@
+{
+  "tool_name": "Bash",
+  "tool_input_preview": "{\"command\":\"yarn test 2>&1 | tail -6; echo ===; yarn typecheck 2>&1 | tail -5; echo ===; yarn lint 2>&1 | tail -10\",\"description\":\"Run vitest, typecheck, lint\"}",
+  "error": "Exit code 1\n Test Files  1 passed (1)\n      Tests  15 passed (15)\n   Start at  00:29:31\n   Duration  3.04s (transform 18ms, setup 0ms, collect 25ms, tests 2.73s, environment 187ms, prepare 30ms)\n\nDone in 3.70s.\n(eval):1: == not found",
+  "timestamp": "2026-07-11T15:29:34.915Z",
+  "retry_count": 1
+}
